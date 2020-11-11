@@ -20,7 +20,7 @@ mkdir -p /etc/logrotate.d/
 
 echo 'L3Zhci9sb2cvbmdpbngvKi5sb2cgewogICAgICAgIGRhaWx5CiAgICAgICAgbWlzc2luZ29rCiAgICAgICAgcm90YXRlIDYwCiAgICAgICAgY29tcHJlc3MKICAgICAgICBkZWxheWNvbXByZXNzCiAgICAgICAgbm90aWZlbXB0eQogICAgICAgIGNyZWF0ZSA2NDQKICAgICAgICBzaGFyZWRzY3JpcHRzCiAgICAgICAgcG9zdHJvdGF0ZQogICAgICAgICAgICBuZ2lueCAtcyByZWxvYWQKICAgICAgICBlbmRzY3JpcHQKfQovdmFyL2xvZy9uZ2lueC8qLyoubG9nIHsKICAgICAgICBkYWlseQogICAgICAgIG1pc3NpbmdvawogICAgICAgIHJvdGF0ZSA2MAogICAgICAgIGNvbXByZXNzCiAgICAgICAgZGVsYXljb21wcmVzcwogICAgICAgIG5vdGlmZW1wdHkKICAgICAgICBjcmVhdGUgNjQ0CiAgICAgICAgc2hhcmVkc2NyaXB0cwogICAgICAgIHBvc3Ryb3RhdGUKICAgICAgICAgICAgbmdpbnggLXMgcmVsb2FkCiAgICAgICAgZW5kc2NyaXB0Cn0KCg==' | base64 -w0 -d > /etc/logrotate.d/$NGINX_CONTAINER
 
-cat<<-EOF >
+cat<<-EOF > /var/containers/$NGINX_CONTAINER/etc/nginx/nginx.conf
 user  nginx;
 worker_processes  1;
 
@@ -98,6 +98,7 @@ docker run -td --name $NGINX_CONTAINER \
     -p 80:80 \
     -p 443:443 \
     -v /var/containers/shared/var/www/sites:/var/www/sites:z \
+    -v /var/containers/$NGINX_CONTAINER/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:z \
     -v /var/containers/$NGINX_CONTAINER/var/log/nginx:/var/log/nginx:z \
     -v /var/containers/$NGINX_CONTAINER/etc/nginx/vhosts:/etc/nginx/vhosts:z \
     -v /var/containers/$NGINX_CONTAINER/etc/nginx/stream.d:/etc/nginx/stream.d:z \
