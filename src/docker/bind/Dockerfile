@@ -1,5 +1,7 @@
 FROM centos:7
 
+USER root
+
 COPY docker-entrypoint.sh docker-health-check.sh /sbin/
 
 COPY named.conf /etc/named.conf.back
