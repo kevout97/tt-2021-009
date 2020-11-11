@@ -18,6 +18,7 @@ mkdir -p /var/containers/$BIND_CONTAINER{/var/named/views/,/var/named/zones/,/et
 chown 25:0 -R /var/containers/$BIND_CONTAINER
 
 docker run -itd --name $BIND_CONTAINER \
+    --restart always \
     -p 53:53/tcp \
     -p 53:53/udp \
     -h $BIND_CONTAINER.$BIND_DOMAIN \
