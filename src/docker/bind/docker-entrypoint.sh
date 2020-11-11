@@ -37,7 +37,7 @@ function check_files(){
 
     if [ ! -f "/etc/named/named.conf" ]; then
         mkdir -p /etc/named/
-        cp $BIND_CONFIG_FILE_BCK /etc/named.conf
+        cp $BIND_CONFIG_FILE_BCK /etc/named/named.conf
     fi
 }
 
