@@ -1,4 +1,3 @@
- 
 #!/bin/bash
 
 FIRST_RUN=1
